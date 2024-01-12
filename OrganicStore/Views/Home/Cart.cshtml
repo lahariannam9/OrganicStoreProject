@@ -1,0 +1,142 @@
+﻿<style>
+    #cart-container {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        justify-content: center;
+        margin-left: 200px; 
+        padding-left:40px;
+        padding-right:40px;
+    }
+
+    .card {
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        overflow: hidden;
+        width: 80%; 
+        text-align: center;
+        transition: transform 0.3s ease-in-out;
+    }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+    img {
+        max-width: 100%;
+        max-height: 100px;
+        object-fit: cover;
+    }
+
+    .card-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+    }
+
+    h3 {
+        margin: 0;
+        font-size: 16px;
+    }
+
+    p {
+        margin: 8px 0;
+        color: #888;
+    }
+   </style>
+
+   <div>
+       <div>
+           <h2 style="color:white"> Your Cart </h2>
+           <br />
+       </div>
+    <div id="cart-container">
+    </div>
+    <br /><br />
+    <div id="total-container" style="background:white; width:120px; border-radius:5px; padding:4px; padding-left:3px;margin-left:780px ">
+        <p style="padding-left:7px">Total: Rs <span id="total-price"></span></p>
+    </div>
+    <br />
+    <div style="background-color: limegreen; color:black; border-radius: 7px; width: 100px; height: 35px; margin-left:780px ">
+        <h6 style="padding-left: 8px;  padding-top:6px">Order Now</h6>
+    </div>
+</div>
+
+    <script>
+    let totalPrice = 0;
+        
+        const itemList = {
+            "apple": "200",
+            "banana": "90",
+            "orange": "150",
+            "kiwi": "300",
+            "pineapple": "100",
+            "strawberry": "300",
+        }
+        const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+        const cartNewItems = [];
+        /*const cartNewItems = [{
+            name:"",
+            quantity:0,
+            price:0
+        }];*/
+       cartItems.forEach(imageName => {
+        const existingItemIndex = cartNewItems.findIndex(item => item.name === imageName);
+
+            if (existingItemIndex !== -1) {
+            cartNewItems[existingItemIndex].quantity++;
+            } else {
+            cartNewItems.push({
+                    name: imageName,
+                    quantity: 1,
+                    price: itemList[imageName],
+                });
+            }
+        });
+    cartNewItems.forEach(imageName => {
+       
+                 console.log(imageName);
+                 const cartContainer = document.getElementById('cart-container');
+                 const cardElement = document.createElement('div');
+                 cardElement.classList.add('card');
+                 const imgElement = document.createElement('img');
+                 console.log(imageName.name + "  " + typeof (imageName.name));
+                 imgElement.src = '/images/' + imageName.name + '.jpg';
+                 imgElement.alt = imageName.name;
+
+                 const cardContentElement = document.createElement('div');
+                 cardContentElement.classList.add('card-content');
+
+                 const headingElement = document.createElement('h3');
+                 headingElement.textContent = imageName.name;
+
+                 const quantityElement = document.createElement('h3');
+                 quantityElement.textContent = 'Quantity: ' + imageName.quantity;
+
+                 const priceElement = document.createElement('p');
+                 const priceforEach = imageName.quantity*imageName.price;
+                 totalPrice = totalPrice + priceforEach;
+                 priceElement.textContent = 'Rs ' + priceforEach;
+                 console.log(totalPrice);
+
+                 const totalElement = document.createElement('p');
+                 totalElement.textContent = 'Total : ' + totalPrice;
+
+                 cardContentElement.appendChild(imgElement);
+                 cardContentElement.appendChild(headingElement);
+                 cardContentElement.appendChild(quantityElement);
+                 cardContentElement.appendChild(priceElement);
+
+        //cardContentElement.appendChild(totalElement);
+
+                 cardElement.appendChild(cardContentElement);
+        //cardElement.appendChild(totalElement);
+                 cartContainer.appendChild(cardElement);
+       // cardContainer.appendChild(totalElement);
+             });
+
+    const totalPriceElement = document.getElementById("total-price");
+    totalPriceElement.textContent = totalPrice;
+            
+</script>

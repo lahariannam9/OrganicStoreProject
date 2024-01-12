@@ -1,0 +1,308 @@
+﻿
+
+<script>
+    function increment(className) {
+        var count = document.getElementsByClassName(className);
+        var temp = count[0].textContent;
+        var stringtemp = temp + "";
+        var x = parseInt(stringtemp);
+        console.log("count   " + x + typeof (x));
+        x = x + 1;
+
+        console.log(x);
+        var num = document.getElementsByClassName(className);
+        num[0].innerText = x;
+
+
+       /* document.addEventListener('DOMContentLoaded', function () {
+            var divElement = document.getElementsByClassName(className)[0];
+            if (divElement) {
+                var textContent = divElement.textContent;
+                console.log('Text Content:', textContent);
+            } else {
+                console.error('Element not found');
+            }*/
+
+
+        // var id = model.Id; //if you want to pass an Id parameter
+        var url = '@Url.Action("product", "Product")' +
+           '?count=' + encodeURIComponent(x) +
+          '&name=' + encodeURIComponent(className);
+
+        // window.location.href = url;
+
+        $.get(url, function (data) {
+            if (data == true) {
+                //alert("result true");
+                addToCart(className, x);
+            }
+            else{
+                alert("result false");
+            }
+            
+            //alert("result true");
+        });
+        // window.location.href = '@Url.Action("product", "Product")?param1=&param2=value2&x=' + x;
+        // const add = document.querySelector(".increase");
+        // const sub = document.querySelector(".decrease");
+        //  const num = document.querySelector(".number");
+        //  const cartNumber = document.querySelector('.cart-number');
+        //  let a = 0;
+
+        /*sub.addEventListener("click", () => {
+            if (a > 0) {
+                a--;
+                num.innerText = a;
+                cartNumber.innerText = a;
+            }
+        });*/
+        
+    }
+        function addToCart(className, x) {
+            /*const fruitItem = {
+                name:className,
+                quantity:1,
+            }*/
+            alert("In add to cart " + className);
+               // const add = document.querySelector(".increase");
+                //const sub = document.querySelector(".decrease");
+        //const num = document.getElementsByClassName(className);
+                const cartNumber = document.querySelector('.cart-number');
+                //num.innerText = 10;
+                cartNumber.innerText = parseInt(cartNumber.innerHTML) + x;
+               const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+        //const cartItems =  [];
+               let imageName = className;
+           // alert(imageSrc);
+        cartItems.push(imageName);
+               localStorage.setItem('cart', JSON.stringify(cartItems));
+
+           }
+</script>
+
+
+<h2 style="color:white; margin-left:500px">Fruits</h2><br />
+
+<div class="row" style="margin-left:110px">
+    <div class="column" style="border-color:white; background-color:white; text-align:center; border-radius:10px">
+        <img src="~/images/apple.jpg" alt="apple" style="width:60%; border-radius:10px" >
+        <div class="desc">
+            <h3>Apple</h3>
+        </div>
+        <div class="desc" style="">Rs 200.00</div>
+        <div style="display: flex;
+        background-color:black;
+        color: white;
+        justify-content: center;
+        align-items: center;
+        border-radius: 5px;
+        width: 80px;
+        padding: 5px;
+        height: 28px;
+        margin-left:85px">
+            <span class="decrease" style="width: 100%; border-right: 2px solid rgba(0,0,0,0.2); border-color: white; border-width: 1px; padding:3px; cursor: pointer;">-</span>
+            <span class="apple" style="width: 100%; border-right: 2px solid rgba(0,0,0,0.2); border-color: white; border-width: 1px; padding:3px">0</span>
+            <span class="increase" style="width: 100%; padding-left:3px; cursor: pointer;" onclick=increment("apple")>+</span>
+        </div>
+    </div>
+
+
+    <div class="column" style="border-color:white; background-color:white; text-align:center; border-radius:10px">
+        <img src="~/images/banana.jpg" alt="apple" style="width:60%; border-radius:10px">
+        <div class="desc">
+            <h3>Banana</h3>
+        </div>
+        <div class="desc" style="">Rs 200.00</div>
+        <div style="display: flex;
+        background-color:black;
+        color: white;
+        justify-content: center;
+        align-items: center;
+        border-radius: 5px;
+        width: 80px;
+        padding: 5px;
+        height: 28px;
+        margin-left:85px">
+            <span class="decrease" style="width: 100%; border-right: 2px solid rgba(0,0,0,0.2); border-color: white; border-width: 1px; padding:3px; cursor: pointer;;">-</span>
+            <span class="banana" style="width: 100%; border-right: 2px solid rgba(0,0,0,0.2); border-color: white; border-width: 1px; padding:3px">0</span>
+            <span class="increase" style="width: 100%; padding-left:3px; cursor: pointer;" onclick=increment("banana")>+</span>
+        </div>
+    </div>
+
+
+    <div class="column" style="border-color:white; background-color:white; text-align:center; border-radius:10px">
+        <img src="~/images/orange.jpg" alt="apple" style="width:60%; border-radius:10px">
+        <div class="desc">
+            <h3>Orange</h3>
+        </div>
+        <div class="desc" style="">Rs 200.00</div>
+        <div style="display: flex;
+        background-color:black;
+        color: white;
+        justify-content: center;
+        align-items: center;
+        border-radius: 5px;
+        width: 80px;
+        padding: 5px;
+height: 28px;
+margin-left:85px">
+            <span class="decrease" style="width: 100%; border-right: 2px solid rgba(0,0,0,0.2); border-color: white; border-width: 1px; padding:3px; cursor: pointer;;">-</span>
+            <span class="orange" style="width: 100%; border-right: 2px solid rgba(0,0,0,0.2); border-color: white; border-width: 1px; padding:3px">0</span>
+            <span class="increase" style="width: 100%; padding-left:3px; cursor: pointer;" onclick=increment("orange")>+</span>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="row" style="margin-left:100px">
+    <div class="column" style="border-color:white; background-color:white; text-align:center; border-radius:10px">
+        <img src="~/images/grapes.jpg" alt="apple" style="width:60%; border-radius:10px">
+        <div class="desc">
+            <h3>Grapes</h3>
+        </div>
+        <div class="desc" style="">Rs 200.00</div>
+        <div style="display: flex;
+        background-color:black;
+        color: white;
+        justify-content: center;
+        align-items: center;
+        border-radius: 5px;
+        width: 80px;
+        padding: 5px;
+height: 28px;
+margin-left:85px">
+            <span class="decrease" style="width: 100%; border-right: 2px solid rgba(0,0,0,0.2); border-color: white; border-width: 1px; padding:3px; cursor: pointer;;">-</span>
+            <span class="number" style="width: 100%; border-right: 2px solid rgba(0,0,0,0.2); border-color: white; border-width: 1px; padding:3px">0</span>
+            <span class="increase" style="width: 100%; padding-left:3px; cursor: pointer;">+</span>
+        </div>
+    </div>
+
+
+    <div class="column" style="border-color:white; background-color:white; text-align:center; border-radius:10px">
+        <img src="~/images/strawberry.jpg" alt="apple" style="width:60%; border-radius:10px">
+        <div class="desc">
+            <h3>Strawberry</h3>
+        </div>
+        <div class="desc" style="">Rs 200.00</div>
+        <div style="display: flex;
+        background-color:black;
+        color: white;
+        justify-content: center;
+        align-items: center;
+        border-radius: 5px;
+        width: 80px;
+        padding: 5px;
+height: 28px;
+margin-left:85px">
+            <span class="decrease" style="width: 100%; border-right: 2px solid rgba(0,0,0,0.2); border-color: white; border-width: 1px; padding:3px; cursor: pointer;;">-</span>
+            <span class="number" style="width: 100%; border-right: 2px solid rgba(0,0,0,0.2); border-color: white; border-width: 1px; padding:3px">0</span>
+            <span class="increase" style="width: 100%; padding-left:3px; cursor: pointer;">+</span>
+        </div>
+    </div>
+
+
+    <div class="column" style="border-color:white; background-color:white; text-align:center; border-radius:10px">
+        <img src="~/images/kiwi.jpg" alt="apple" style="width:60%; border-radius:10px">
+        <div class="desc">
+            <h3>Kiwi</h3>
+        </div>
+        <div class="desc" style="">Rs 200.00</div>
+        <div style="display: flex;
+        background-color:black;
+        color: white;
+        justify-content: center;
+        align-items: center;
+        border-radius: 5px;
+        width: 80px;
+        padding: 5px;
+height: 28px;
+margin-left:85px">
+            <span class="decrease" style="width: 100%; border-right: 2px solid rgba(0,0,0,0.2); border-color: white; border-width: 1px; padding:3px; cursor: pointer;;">-</span>
+            <span class="number" style="width: 100%; border-right: 2px solid rgba(0,0,0,0.2); border-color: white; border-width: 1px; padding:3px">0</span>
+            <span class="increase" style="width: 100%; padding-left:3px; cursor: pointer;">+</span>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+<div class="row" style="margin-left:100px">
+    <div class="column" style="border-color:white; background-color:white; text-align:center; border-radius:10px">
+        <img src="~/images/apple.jpg" alt="apple" style="width:60%; border-radius:10px">
+        <div class="desc">
+            <h3>Apple</h3>
+        </div>
+        <div class="desc" style="">Rs 200.00</div>
+        <div style="display: flex;
+        background-color:black;
+        color: white;
+        justify-content: center;
+        align-items: center;
+        border-radius: 5px;
+        width: 80px;
+        padding: 5px;
+height: 28px;
+margin-left:85px">
+            <span class="decrease" style="width: 100%; border-right: 2px solid rgba(0,0,0,0.2); border-color: white; border-width: 1px; padding:3px; cursor: pointer;;">-</span>
+            <span class="number" style="width: 100%; border-right: 2px solid rgba(0,0,0,0.2); border-color: white; border-width: 1px; padding:3px">0</span>
+            <span class="increase" style="width: 100%; padding-left:3px; cursor: pointer;">+</span>
+        </div>
+    </div>
+
+
+    <div class="column" style="border-color:white; background-color:white; text-align:center; border-radius:10px">
+        <img src="~/images/apple.jpg" alt="apple" style="width:60%; border-radius:10px">
+        <div class="desc">
+            <h3>Apple</h3>
+        </div>
+        <div class="desc" style="">Rs 200.00</div>
+        <div style="display: flex;
+        background-color:black;
+        color: white;
+        justify-content: center;
+        align-items: center;
+        border-radius: 5px;
+        width: 80px;
+        padding: 5px;
+height: 28px;
+margin-left:85px">
+            <span class="decrease" style="width: 100%; border-right: 2px solid rgba(0,0,0,0.2); border-color: white; border-width: 1px; padding:3px; cursor: pointer;;">-</span>
+            <span class="number" style="width: 100%; border-right: 2px solid rgba(0,0,0,0.2); border-color: white; border-width: 1px; padding:3px">0</span>
+            <span class="increase" style="width: 100%; padding-left:3px; cursor: pointer;">+</span>
+        </div>
+    </div>
+
+
+    <div class="column" style="border-color:white; background-color:white; text-align:center; border-radius:10px">
+        <img src="~/images/apple.jpg" alt="apple" style="width:60%; border-radius:10px">
+        <div class="desc">
+            <h3>Apple</h3>
+        </div>
+        <div class="desc" style="">Rs 200.00</div>
+        <div style="display: flex;
+        background-color:black;
+        color: white;
+        justify-content: center;
+        align-items: center;
+        border-radius: 5px;
+        width: 80px;
+        padding: 5px;
+height: 28px;
+margin-left:85px">
+            <span class="decrease" style="width: 100%; border-right: 2px solid rgba(0,0,0,0.2); border-color: white; border-width: 1px; padding:3px; cursor: pointer;;">-</span>
+            <span class="number" style="width: 100%; border-right: 2px solid rgba(0,0,0,0.2); border-color: white; border-width: 1px; padding:3px">0</span>
+            <span class="increase" style="width: 100%; padding-left:3px; cursor: pointer;">+</span>
+        </div>
+    </div>
+</div>
+
+
+
+
+  

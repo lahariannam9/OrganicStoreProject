@@ -1,0 +1,52 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<div style="display:flex; margin:100px" >
+    <div style="flex:1; background-color:white">
+        <div style="margin:30px; text-align:center"><br />
+            <img src="~/images/leaves.png" style="width:120px" />
+            <br /><br />
+            <h4>Create an account</h4><br />
+            @using (Html.BeginForm("Signup", "Signup", FormMethod.Post)){
+        <form >
+            <label for="username">Name  </label><br />
+            <input type="text" id="username" name="username" style="width:250px; border-radius:8px; border-width:1px"><br><br>
+                <label for="email">Email ID </label><br />
+                <input type="text" id="email" name="email" style="width:250px; border-radius:8px; border-width:1px"><br><br>
+                <label for="password">Password </label><br />
+                <input type="password" id="password" name="password" style="width:250px; border-radius:8px; border-width:1px"><br><br>
+                <input type="submit" value="Signup" style="width:250px; background-color:black; color:white; border-radius:8px">
+        </form>
+        }
+        </div>
+    </div>
+
+
+    <div style="flex:1; overflow:hidden; background-image:url('https://www.lawdonut.co.uk/business/sites/lawdonut-business/files/organicfarm1_0.jpg'); height:100vh;">
+        <div style="background-color:black; opacity:0.7; padding-left:60px">
+            <br /><br /><br /><br /><br /><br /><br /><br /><h1 style="color:white">Life <br />Organics</h1><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+        </div>
+    </div>
+
+
+    
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

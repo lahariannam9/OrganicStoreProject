@@ -1,0 +1,27 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<div class="login-container" style="background-image:url();background-color:white;width:fit-content; padding:35px; border-radius:20px; text-align:center; margin-top:60px; margin-bottom:70px; margin-left:450px; box-shadow:0 0 20px rgba(98, 180, 255, 0.84);
+">
+    <h2 style="color:black; align-content:center ">Login</h2><br>
+    <img src="~/images/profile-icon.png" style="width:90px" /><br><br>
+
+     @using (Html.BeginForm("Login", "Login", FormMethod.Post))
+            {
+    <form>
+       <input type="text" name="username" id="username" placeholder=" Username" style="border-radius:8px; border-width:1px; height:32px; margin:10px">
+        <br>
+     
+        <input type="password" name="password" id="password" placeholder=" Password" style="border-radius:8px; border-width:1px; height:32px">
+        <br><br>
+        <button type="submit" style="padding:5px; border-radius:10px; width:80px; background-color:navy; color:white; border-width:1px">Login</button>
+    </form>
+            }
+    <br>
+    <div>
+        New User?
+        <a href="Signup">Signup</a>
+    </div>
+</div>
